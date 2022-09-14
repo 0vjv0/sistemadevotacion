@@ -1,8 +1,8 @@
-# Sistema de votacion
+# Sistema de votacion en Django
 
 Aplicación web para sistema de votación a cargos directivos de asociación
 
-Se trata de una aplicación en Pyton para un sistema de votación de los diferentes cargos directivos de la organización. 
+Se trata de una aplicación en Django para un sistema de votación de los diferentes cargos directivos de la organización. 
 
 Requiere que la persona votante acceda con datos de autenticación previamente definidos (y alamacenados en la base de datos) y después seleccionar el/los cargos a los que quiere depositar su voto. Una vez seleccionado el cargo, el sistema presenta la lista de candidaturas y la persona votante elegirá uno de los nombres (o hasta tres, en el caso de las vocalías) y posteriormente confirmará su voto.
 
