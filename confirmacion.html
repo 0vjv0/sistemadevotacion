@@ -1,0 +1,70 @@
+{% extends "Votacion/layout.html" %}
+
+{% block cuerpo %}
+
+<div class="px-4 py-5 my-5 text-center" style="margin:auto;">
+    <h1 class="display-5 fw-bold">Confirmación</h1>
+        <p>Votante: <span style="color: #335e95;"><b> {{ request.user.first_name }} {{ request.user.last_name }}</b></span></p>
+
+    <div class="col-lg-6 mx-auto">
+        {% if votado %}
+            <form action="{% url 'Votacion:confirmar' votado.pk %}" method="POST" name="confirmacion">
+                {% csrf_token %}
+
+                <p class="lead mb-4">{{ votado }} para {{ votado.puesto }}</p>
+
+                <input type="hidden" name="votado" value="{{ votado }}">
+
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style="margin-bottom: 10%;">
+                    <h4 class="fw-bold mb-0">
+                        <button class="w-100 btn btn-lg btn-primary" type="submit">Confirmar</button>
+                    </h4>
+                </div>
+
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style="margin-bottom: 20%;">
+                <h4 class="fw-bold mb-0">
+                    <button class="w-100 btn  btn-outline-primary">
+                        <a href="{% url 'Votacion:paginadevotacion' votado.puesto %}" style="text-decoration:none">
+                            No confirmar voto</a>
+                    </button>
+                    </h4>
+                </div>
+
+            </form>
+
+        {% else %}
+
+        <form action="{% url 'Votacion:confirmar_blanco' puesto %}" method="POST" name="confirmacion">
+            {% csrf_token %}
+
+            <p class="lead mb-4">Voto en blanco para {{ puesto }}</p>
+
+            <input type="hidden" name="puesto" value="{{ puesto }}">
+
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center"  style="margin-bottom: 10%;">
+                <h4 class="fw-bold mb-0">
+                    <button class="w-100 btn btn-lg btn-primary" name="blanco" type="submit">Confirmar</button>
+                </h4>
+            </div>
+
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style="margin-bottom: 20%;">
+            <h4 class="fw-bold mb-0">
+                <button class="w-100 btn btn-outline-primary">
+                    <a href="{% url 'Votacion:paginadevotacion' puesto %}" style="text-decoration:none">
+                        No confirmar voto</a>
+                </button>
+                </h4>
+            </div>
+
+        </form>
+        {% endif %}
+
+    </div>
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <p><span class="text-muted"><a href="{% url 'Votacion:index' %}">Inicio</a></span></p>
+        <p><span class="text-muted"> <a href="{% url 'Votacion:salida' %}">Salir</a></span></p>
+    </footer>
+
+</div>
+{% endblock %}

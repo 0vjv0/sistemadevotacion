@@ -1,0 +1,33 @@
+{% extends "Votacion/layout.html" %}
+
+{% block cuerpo %}
+<main class="form-signin">
+  <form action="{% url 'Votacion:login' %}" method='post'>
+    {% csrf_token %}
+
+    {% load static %}
+    <img class="d-block mb-4" src="{% static 'logo.jpg'%}" alt="logo" width="100">
+
+      <h1 class="h3 mb-3 fw-normal">Acceso a la plataforma de votación</h1>
+      <p class="text-muted">Inicial de nombre + primer apellido</p>
+        <p style="color:red">{{ message }}</p>
+      <div class="form-floating">
+        <input type="text" name="username" class="form-control" id="floatingInput" placeholder="Nombre">
+        <label for="floatingInput">Nombre</label>
+      </div>
+      <br/>
+
+      <p class="text-muted">Número de cédula</p>
+      <div class="form-floating">
+        <input type="password" class="form-control"  name="password" id="floatingPassword" placeholder="Contraseña">
+        <label for="floatingPassword">Contraseña</label>
+      </div>
+
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
+    </form>
+  </main>
+
+{% endblock %}
+
+{% block pie %}
+{% endblock %}

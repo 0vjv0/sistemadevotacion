@@ -1,0 +1,119 @@
+{% extends "Votacion/layout.html" %}
+
+{% block cuerpo %}
+<div style="margin-top: 50px;">
+<div class="container px-4 py-5" id="icon-grid">
+    <h2 class="pb-2 border-bottom">Datos de participación por territorios</h2>
+
+    <div class="d-grid gap-2" style="margin-bottom: 5%; margin-top:5%">
+
+         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
+             <div>
+                <h4 class="fw-bold mb-0">
+                    <button class="w-100 btn btn-outline-primary">
+                    <a href="{% url 'Votacion:participacion' territorio='globales' %}">Global</a>
+                </button>
+                </h4>
+            </div>
+            <div>
+                <h4 class="fw-bold mb-0">
+                    <button class="w-100 btn btn-outline-primary">
+                    <a href="{% url 'Votacion:participacion' territorio='Carazo' %}">Carazo</a>
+                </button>
+                </h4>
+            </div>
+            <div>
+                <h4 class="fw-bold mb-0">
+                    <button class="w-100 btn btn-outline-primary">
+                    <a href="{% url 'Votacion:participacion' territorio='Chinandega' %}">Chinandega</a>
+                </button>
+                </h4>
+            </div>
+            <div>
+                <h4 class="fw-bold mb-0">
+                    <button class="w-100 btn btn-outline-primary">
+                    <a href="{% url 'Votacion:participacion' territorio='Ciudad Sandino' %}">Ciudad Sandino</a>
+                </button>
+                </h4>
+            </div>
+            <div>
+                <h4 class="fw-bold mb-0">
+                    <button class="w-100 btn btn-outline-primary">
+                    <a href="{% url 'Votacion:participacion' territorio='Estelí' %}">Estelí</a>
+                </button>
+                </h4>
+            </div>
+            <div>
+                <h4 class="fw-bold mb-0">
+                    <button class="w-100 btn btn-outline-primary">
+                    <a href="{% url 'Votacion:participacion' territorio='Jinotega' %}">Jinotega</a>
+                </button>
+                </h4>
+            </div>
+            <div>
+                <h4 class="fw-bold mb-0">
+                    <button class="w-100 btn btn-outline-primary">
+                    <a href="{% url 'Votacion:participacion' territorio='León' %}">León</a>
+                </button>
+                </h4>
+            </div>
+            <div>
+                <h4 class="fw-bold mb-0">
+                    <button class="w-100 btn btn-outline-primary">
+                    <a href="{% url 'Votacion:participacion' territorio='Managua' %}">Managua</a>
+                </button>
+                </h4>
+            </div>
+            <div>
+                <h4 class="fw-bold mb-0">
+                    <button class="w-100 btn btn-outline-primary">
+                    <a href="{% url 'Votacion:participacion' territorio='Masaya' %}">Masaya</a>
+                </button>
+                </h4>
+            </div>
+            <div>
+                <h4 class="fw-bold mb-0">
+                    <button class="w-100 btn btn-outline-primary">
+                    <a href="{% url 'Votacion:participacion' territorio='Matagalpa' %}">Matagalpa</a>
+                </button>
+                </h4>
+            </div>
+            <div>
+                <h4 class="fw-bold mb-0">
+                    <button class="w-100 btn btn-outline-primary">
+                    <a href="{% url 'Votacion:participacion' territorio='RAAN' %}">RAAN</a>
+                </button>
+                </h4>
+            </div>
+            <div>
+                <h4 class="fw-bold mb-0">
+                    <button class="w-100 btn btn-outline-primary">
+                    <a href="{% url 'Votacion:participacion' territorio='Ticuantepe' %}">Ticuantepe</a>
+                </button>
+                </h4>
+            </div>
+            <div>
+                <h4 class="fw-bold mb-0">
+                    <button class="w-100 btn btn-outline-primary">
+                    <a href="{% url 'Votacion:participacion' territorio='Tipitapa' %}">Tipitapa</a>
+                </button>
+                </h4>
+            </div>
+            <div>
+                <h4 class="fw-bold mb-0">
+                    <button class="w-100 btn btn-outline-primary">
+                    <a href="{% url 'Votacion:participacion' territorio='en el exterior' %}">en el exterior</a>
+                </button>
+                </h4>
+            </div>
+
+        </div>
+    </div>
+
+        <footer class="footer mt-auto py-3 bg-light" style="text-align: center;">
+            <p><span class="text-muted"> <a href="{% url 'Votacion:resultados' %}">Resultados</a></span></p>
+            <p><span class="text-muted"> <a href="{% url 'Votacion:logout' %}">Salir</a></span></p>
+        </footer>
+</div>
+</div>
+{% endblock %}

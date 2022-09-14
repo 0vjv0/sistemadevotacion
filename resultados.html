@@ -1,0 +1,73 @@
+{% extends "Votacion/layout.html" %}
+
+{% block cuerpo %}
+<div class="card" style="width: 90%; margin: auto;">
+   <div class="card-body">
+      <h5 class="card-title" style="color:#335e95">Presidencia:</h5>
+      <p></p>
+      <ul>
+        {% for c in c_presidencia %}
+            <li><h7 class="card-subtitle mb-2 text-muted"><b>{{ c }}</b>: {{ c.votos }} voto(s)</h7></li>
+        {% endfor %}
+        <!--li><h7 class="card-subtitle mb-2 text-muted"><b>En blanco:</b> {{ blancos_presidencia }} voto(s)</li-->
+        </ul>
+    </div>
+
+   <div class="card-body">
+      <h5 class="card-title" style="color:#335e95">Vicepresidencia:</h5>
+      <p></p>
+      <ul>
+        {% for c in c_vicepresidencia %}
+            <li><h7 class="card-subtitle mb-2 text-muted"><b>{{ c }}</b>: {{ c.votos }} voto(s)</h7></li>
+        {% endfor %}
+                <!--li><h7 class="card-subtitle mb-2 text-muted"><b>En blanco:</b> {{ blancos_vicepresidencia }} voto(s)</li-->
+
+        </ul>
+    </div>
+
+    <div class="card-body">
+      <h5 class="card-title" style="color:#335e95">Secretaría:</h5>
+      <p></p>
+      <ul>
+        {% for c in c_secretaria %}
+            <li><h7 class="card-subtitle mb-2 text-muted"><b>{{ c }}</b>: {{ c.votos }} voto(s)</h7></li>
+        {% endfor %}
+                <!--li><h7 class="card-subtitle mb-2 text-muted"><b>En blanco:</b> {{ blancos_secretaria }} voto(s)</li-->
+
+        </ul>
+    </div>
+
+    <div class="card-body">
+      <h5 class="card-title" style="color:#335e95">Tesorería:</h5>
+      <p></p>
+      <ul>
+        {% for c in c_tesoreria %}
+            <li><h7 class="card-subtitle mb-2 text-muted"><b>{{ c }}</b>: {{ c.votos }} voto(s)</h7></li>
+        {% endfor %}
+                <!--li><h7 class="card-subtitle mb-2 text-muted"><b>En blanco:</b> {{ blancos_tesoreria }} voto(s)</li-->
+
+        </ul>
+    </div>
+
+        <div class="card-body">
+      <h5 class="card-title" style="color:#335e95">Vocales:</h5>
+      <p></p>
+      <ul>
+        {% for c in c_vocalias %}
+            <li><h7 class="card-subtitle mb-2 text-muted"><b>{{ c }}</b>: {{ c.votos }} voto(s)</h7></li>
+        {% endfor %}
+                <!--li><h7 class="card-subtitle mb-2 text-muted"><b>En blanco:</b> {{ blancos_vocales }} voto(s)</li-->
+
+        </ul>
+    </div>
+<footer class="footer mt-auto py-3 bg-light" style="text-align: center;">
+        <p><span class="text-muted"> <a href="{% url 'Votacion:opciones' %}">Participación</a></span></p>
+        <p><span class="text-muted"> <a href="{% url 'Votacion:logout' %}">Salir</a></span></p>
+    </footer>
+</div>
+
+
+
+
+
+{% endblock %}

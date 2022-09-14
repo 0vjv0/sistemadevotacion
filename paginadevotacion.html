@@ -1,0 +1,128 @@
+{% extends "Votacion/layout.html" %}
+
+{% block cuerpo %}
+
+{% if message %}
+    {{ message }}
+{% endif %}
+
+
+<div class="card" style="width: 90%; margin: auto;">
+    <div class="card-body">
+      <h5 class="card-title">Votación para {{ puesto }}</h5>
+        <p>Votante: <span style="color: #335e95;"><b> {{ request.user.first_name }} {{ request.user.last_name }}</b></span></p>
+
+      {% if puesto.cargo == 'Vocales' %}
+      <form action="{% url 'Votacion:confirmar_vocalias' %}" method="POST" >
+          {% csrf_token %}
+    <p></p>
+        <h6 class="card-subtitle mb-2 text-muted">Puede elegir hasta 3 personas como vocales</h6>
+    <p></p>
+          {% for candidat in candidatos|dictsort:'id.last_name' %}
+          <p class="card-text"><input type="checkbox" id="{{ candidat.id }}" name="vocal" value="{{ candidat.id }}" class="larger">
+              <label for="{{ candidat.id }}">{{ candidat.id.first_name }} {{candidat.id.last_name}}</label>  </p>
+            {% endfor %}
+            <div style="margin-top: 3%;">
+              <h4 class="fw-bold mb-0">
+                <input class="w-75 btn btn-primary" id="votar" type="submit" name="vocalias_votadas" value="Votar">
+                </h4>
+              </div>
+        </form>
+
+        <div id="sontres" style="margin-top: 3%;"></div>
+        <h4 class="fw-bold mb-0"></h4>
+        <button id="resetear" class="w-45 btn btn-primary"><a href="{% url 'Votacion:paginadevotacion' puesto=puesto %}" style="text-decoration: none; color:whitesmoke">Recomenzar</a></button>
+        </h4>
+    <p></p>
+      {% else %}
+      <form action="{% url 'Votacion:paginadevotacion' puesto=puesto %}" method="POST" >
+          {% csrf_token %}
+          <h6 class="card-subtitle mb-2 text-muted">Candidato/as:</h6>
+            <br/>
+              {% for candidat in candidatos|dictsort:'id.last_name' %}
+                  <p><input type="radio" id="{{ candidat.id }}" name="voto" value="{{ candidat.pk }}">
+                  <label for=" {{ candidat.id }}">{{ candidat.id.first_name }} {{candidat.id.last_name}}</label>
+                   </p>
+              {% endfor %}
+              <div style="margin-top: 3%;">
+
+                <h4 class="fw-bold mb-0">
+                  <button class="w-75 btn btn-primary" type="submit">Votar</button>
+                </h4>
+              </div>
+      </form>
+
+      {% endif %}
+
+
+    </div>
+
+  <footer class="footer mt-auto py-3 bg-light" style="text-align:center">
+    <div class="container">
+      <p><span class="text-muted"><a href="{% url 'Votacion:index' %}">Inicio</a></span></p>
+      <p><span class="text-muted"> <a href="{% url 'Votacion:salida' %}">Salir</a></span></p>
+    </div>
+  </footer>
+
+  </div>
+
+
+{% endblock %}
+
+
+
+{% block script %}
+{% if puesto.cargo == 'Vocales' %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const boxes = document.querySelectorAll('input[type=checkbox]');
+            const votar = document.getElementById("votar");
+            const reset = document.getElementById("resetear");
+            const recuento = document.getElementById("sontres");
+            let chks = 0;
+
+            clean();
+
+
+            for (const box of boxes){
+
+                box.addEventListener("click", function(){
+                    chks = 0;
+                    for (const box of boxes) {
+                        if (box.checked) {
+                            chks++;
+
+                            if (chks == 3){
+                                recuento.innerHTML = "<p class='card-text'>Ya ha elegido 3 vocales. </p><p class='card-text'>Puede votar y después confirmar o modificar su voto."
+                            }
+                            else if (chks >= 4){
+                                for (const box of boxes) {box.disabled=true}
+
+                                votar.style.display = 'none';
+                                votar.style.visibility = 'hidden';
+                                reset.style.display = 'inline';
+                                reset.style.visibility = 'visible';
+                                recuento.innerHTML = "<p class='card-text'>Intenta votar a más de 3 personas.</p><p class='card-text'>Debe comenzar de nuevo</p>"
+
+                            }
+
+                        }
+                    }
+                });
+            };
+
+            function clean(){
+
+                for(const box of boxes){box.checked = false; box.disabled=false}
+                reset.style.display = 'none';
+                reset.style.visibility = 'hidden';
+                votar.style.display = 'inline';
+                votar.style.visibility = 'visible';
+                chks = 0;
+            }
+        });
+    </script>
+{% endif %}
+{% endblock %}

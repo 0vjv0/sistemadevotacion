@@ -1,0 +1,20 @@
+{% extends "Votacion/layout.html" %} {% block cuerpo %}
+Cargos a elegir
+
+Votante: {{ request.user.first_name }} {{ request.user.last_name }}
+{% for puesto in votaciones_sinhacer %}
+{% endfor %}
+{% if votaciones_hechas %}
+Ya votó por
+{% endif %}
+
+    {% for v in votaciones_hechas %}
+    {{ v }}
+    {% empty %}
+    No ha emitido ningún voto aún
+    {% endfor %} 
+
+Inicio
+
+Salir
+{% endblock %} 

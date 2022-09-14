@@ -1,0 +1,51 @@
+{% extends "Votacion/layout.html" %}
+
+{% block cuerpo %}
+<div class="px-4 py-5 my-5 text-center" style="margin:auto;">
+    <h1 class="display-5 fw-bold">Confirmación del voto</h1>
+       <p>Votante: <span style="color: #335e95;"><b> {{ request.user.first_name }} {{ request.user.last_name }}</b></span></p>
+
+    <form name="confirmacion" action method="POST">
+    {% csrf_token %}
+
+        {% for v in vocales %}
+            <p class="lead mb-4">{{ v.first_name }} {{ v.last_name }} para vocal</p>
+            <input type="hidden" name="vocal" value="{{ v }}">
+        {% empty %}
+            <p class="lead mb-4">Voto en blanco para los tres vocales</p>
+            <input type="hidden" name="enblanco" value="3">
+        {% endfor %}
+
+        {% if enblanco %}
+            <p class="lead mb-4">{{ enblanco }} voto(s) en blanco</p>
+            <input type="hidden" name="enblanco" value="{{ enblanco }}">
+        {% endif %}
+
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <h4 class="fw-bold mb-0">
+                <button class="w-100 btn btn-lg btn-primary" name="confirmar" type="submit">Confirmar</button>
+            </h4>
+        </div>
+
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center" style="margin-top: 3%;">
+        <h4 class="fw-bold mb-0">
+            <button class="w-100 btn btn-outline-primary">
+                <a href="{% url 'Votacion:paginadevotacion' 'Vocales' %}" style="text-decoration:none">
+                    No confirmar voto</a>
+            </button>
+            </h4>
+        </div>
+</form>
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <p><span class="text-muted"><a href="{% url 'Votacion:index' %}">Inicio</a></span></p>
+            <p><span class="text-muted"> <a href="{% url 'Votacion:salida' %}">Salir</a></span></p>
+        </div>
+    </footer>
+    </div>
+
+{% endblock %}
+
+
+

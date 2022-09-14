@@ -1,0 +1,49 @@
+{% extends "Votacion/layout.html" %}
+
+{% block cuerpo %}
+<div style="margin-top: 330px;">
+    <div class="container">
+        <h2 class="pb-2">Datos de participación ({{ territorio }})</h2>
+
+        <p><b>Padrón electoral: &nbsp; <span style="color:#335e95;">{{ padron }}</b></span></p>
+        <p><b>Votos emitidos: &nbsp; <span style="color:#335e95;">{{ votos }} personas terminaron toda la votacion</b></span></p>
+        <p><b>Participación: &nbsp; <span style="color:#335e95;">{{ particpcn_porcentaje }}%</b></span></p>
+        <p><b>Abstención: &nbsp; <span style="color:#335e95;">{{ abstencion_porcentaje }}%</b></span></p>
+
+        <div class="col d-flex align-items-start">
+            <canvas id="chart" width="50%" height="50%"></canvas>
+        </div>
+
+        <footer class="footer mt-auto py-3 bg-light" style="text-align: center;">
+            <p><span class="text-muted"> <a href="{% url 'Votacion:resultados' %}">Resultados</a></span></p>
+            <p><span class="text-muted"> <a href="{% url 'Votacion:index' %}">Regresar</a></span></p>
+            <p><span class="text-muted"> <a href="{% url 'Votacion:logout' %}">Salir</a></span></p>
+         </footer>
+
+    </div>
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4"></script>
+
+<script>
+    let ctx = document.getElementById("chart").getContext("2d");
+
+let chart = new Chart(ctx, {
+  type: "pie",
+  data: {
+     labels: ["Participación", "Abstención"],
+     datasets: [
+        {
+          backgroundColor: ["#335e95", "#ffffff"],
+          borderColor: "#417690",
+          data: [{{ particpcn }}, {{ abstencion }}]
+        }
+     ]
+  },
+});
+
+</script>
+{% endblock %}

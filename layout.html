@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Votación</title>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale = 1.0" >
+        <meta name="robots" content="noindex" />
+
+
+    <style>
+
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        display: flex;
+        align-items: center;
+        padding-top: 2%;
+        padding-bottom: 2%;
+    }
+
+
+    .form-signin {
+        width: 100%;
+        max-width: 330px;
+        padding: 15px;
+        margin: auto;
+    }
+
+    .form-signin .form-floating:focus-within {z-index: 2;}
+
+    .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+
+    .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+    }
+
+    .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+    }
+
+    .btn-primary {
+        background-color: #335e95!important ;
+        border-color: #335e95!important ;
+    }
+
+    .btn-outline-primary {
+        border-color: #335e95!important ;
+    }
+
+    button:nth-child(1) > a:nth-child(1):hover {
+        color: whitesmoke;
+        text-decoration: none;
+        font-weight: bolder;
+    }
+    button.w-100.btn.btn-outline-primary, a:hover{
+        color: whitesmoke;
+        text-decoration: none;
+        font-weight: bolder;
+    }
+    button#resetear.w-75.btn.btn-primary:hover a{
+        color: whitesmoke;
+        text-decoration: none;
+        font-weight: bolder;
+
+    input.larger {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    </style>
+
+    </head>
+    <body>
+        {% load django_bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+
+        {% block cabeza %}
+        {% endblock %}
+
+        {% if request.user %}
+
+        {% endif %}
+
+        {% block cuerpo %}
+        {% endblock %}
+
+        {% block pie %}
+        {% endblock %}
+
+
+        {% block script %}
+        {% endblock %}
+
+
+    </body>
+</html>

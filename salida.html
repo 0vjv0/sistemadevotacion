@@ -1,0 +1,51 @@
+{% extends "Votacion/layout.html" %}
+
+
+{% block cuerpo %}
+<div class="container" id="icon-grid" style="margin-top:50px!important">
+    <h2 class="pb-2 border-bottom">Va a salir de la plataforma</h2>
+
+    <h4 class="fw-bold mb-0">Tiene {{ pendientes }} votación(es) pendiente(s)</h4>
+    <p>Votante: <span style="color: #335e95;"><b> {{ request.user.first_name }} {{ request.user.last_name }}</b></span></p>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
+
+            {% for v in votaciones_sinhacer %}
+            <div class="col d-flex align-items-start">
+                <button class="w-100 btn btn-outline-primary" id="{{ v }}">
+                    <a href="{% url 'Votacion:chequeovotacion' cargo=v %}">{{ v }}</a>
+                </button>
+            </div>
+            {% endfor %}
+
+    </div>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
+        <h5 class="fw-bold mb-0">Puede dejarlas como votos</h5>
+
+        <div class="col d-flex align-items-start">
+            <form id="enblanco" action="{% url 'Votacion:varios_blancos' %}" method="POST">
+                {% csrf_token %}
+                    {% for v in votaciones_sinhacer %}
+                        <input type="hidden" name="blanco" value="{{ v }}">
+                    {% endfor %}
+                <button class="w-100 btn btn-primary" type="submit">en blanco,</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
+        <div class="col d-flex align-items-start">
+            <form>
+            <button class="w-100 btn btn-outline-primary">
+                <a href="{% url 'Votacion:logout' %}" style="text-decoration: none;">
+                    o guardar
+                </a>
+            </button>
+        </form>
+        </div>
+            <h5 class="fw-bold mb-0">y terminar el proceso más adelante</h5>
+    </div>
+
+</div>
+{% endblock %}
